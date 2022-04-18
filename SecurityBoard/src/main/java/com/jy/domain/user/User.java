@@ -1,15 +1,21 @@
 package com.jy.domain.user;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.jy.domain.BaseTimeEntity;
 import com.jy.domain.Role;
+import com.jy.domain.comment.Comment;
+import com.jy.domain.post.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,7 +48,15 @@ public class User extends BaseTimeEntity{
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Role role;
-	
+//	
+//	/* Post */
+//	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//	private List<Post> post;
+//	
+//	/* Comment */
+//	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//	private List<Comment> comment;
+//	
 	/* 회원 정보 수정 */
 	public void modify(String nickname, String password) {
 		this.nickname = nickname;

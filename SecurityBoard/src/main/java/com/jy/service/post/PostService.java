@@ -3,6 +3,8 @@ package com.jy.service.post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.jy.config.auth.UserAdapter;
+import com.jy.domain.user.User;
 import com.jy.web.dto.PostDto;
 import com.jy.web.vo.PageVo;
 

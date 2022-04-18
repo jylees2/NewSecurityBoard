@@ -123,12 +123,6 @@ public class PostController {
 			if( comment.stream().anyMatch( s -> s.getUserId().equals(user.getUserDto().getId())) ) {
 				model.addAttribute("commentWriter", true);
 			}
-			/*
-			 for(int i=0; i<comment.size(); i++){
-			 	boolean commentWriter = comment.get(i).getUserId().equals(user.getId());
-			 	model.addAttribute("commentWriter", commentWriter);
-			 }
-			 */
 		}
 		
 		return "post/post-read";

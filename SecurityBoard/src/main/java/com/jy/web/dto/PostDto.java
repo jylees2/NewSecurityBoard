@@ -26,7 +26,7 @@ public class PostDto {
 		private Long id;
 		private String title;
 		private String content;
-		private String writer;
+//		private String writer;
 		private int view;
 		private String createdDate, modifiedDate;
 		
@@ -37,7 +37,7 @@ public class PostDto {
 							.id(id)
 							.title(title)
 							.content(content)
-							.writer(writer)
+//							.writer(writer)
 							.view(0)
 							.user(user)
 							.build();
@@ -75,7 +75,7 @@ public class PostDto {
 			this.id = post.getId();
 			this.title = post.getTitle();
 			this.content = post.getContent();
-			this.writer = post.getWriter();
+			this.writer = post.getUser().getNickname();
 			this.view = post.getView();
 			this.createdDate = post.getCreatedDate();
 			this.modifiedDate = post.getModifiedDate();

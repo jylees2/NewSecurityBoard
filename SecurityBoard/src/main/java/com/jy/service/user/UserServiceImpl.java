@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jy.config.auth.UserAdapter;
+import com.jy.domain.post.Post;
 import com.jy.domain.user.User;
 import com.jy.domain.user.UserRepository;
+import com.jy.service.post.PostService;
 import com.jy.web.dto.UserDto;
 import com.jy.web.dto.UserDto.RequestUserDto;
 import com.jy.web.dto.UserDto.ResponseUserDto;
@@ -24,6 +26,8 @@ public class UserServiceImpl implements UserService{
 
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder encoder;
+	
+	private final PostService postService;
 	
 	/* 회원가입 */
 	@Override
@@ -48,6 +52,7 @@ public class UserServiceImpl implements UserService{
 		/* 수정한 비밀번호 암호화 */
 		String encryptPassword = encoder.encode(dto.getPassword());
 		user.modify(dto.getNickname(), encryptPassword); // 수정
+
 		return user.getId();
 	}
 

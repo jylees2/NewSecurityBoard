@@ -40,8 +40,8 @@ public class Post extends BaseTimeEntity{
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String content;
 	
-	@Column(nullable = false)
-	private String writer;
+//	@Column(nullable = false)
+//	private String writer;
 	
 	@Column(columnDefinition = "integer default 0", nullable = false)
 	private int view;
@@ -60,5 +60,5 @@ public class Post extends BaseTimeEntity{
 		this.title = title;
 		this.content = content;
 	}
-	
+
 }

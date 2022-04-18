@@ -7,6 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jy.config.auth.UserAdapter;
+import com.jy.domain.comment.Comment;
 import com.jy.domain.post.Post;
 import com.jy.domain.post.PostRepository;
 import com.jy.domain.user.User;
@@ -66,7 +68,7 @@ public class PostServiceImpl implements PostService{
 	public void update(Long id, RequestDto requestDto) {
 		Post post = postRepository.findById(id).orElseThrow(() ->
 				new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
-
+		
 		/* 수정 메서드 호출 */
 		post.update(requestDto.getTitle(), requestDto.getContent());
 		log.info("수정 완료");
@@ -94,7 +96,7 @@ public class PostServiceImpl implements PostService{
 		Page<Post> page = postRepository.findAll(pageable);
 		
 		// 데이터를 그대로 노출하는 것은 위험, DTO로 변환해서 리턴할 것
-        Page<PostDto.ResponseDto> map = page.map(post -> new PostDto.ResponseDto(post.getId(), post.getTitle(), null, post.getWriter(), post.getView(), post.getCreatedDate(), post.getModifiedDate(), null, null));
+        Page<PostDto.ResponseDto> map = page.map(post -> new PostDto.ResponseDto(post.getId(), post.getTitle(), null, post.getUser().getNickname(), post.getView(), post.getCreatedDate(), post.getModifiedDate(), null, null));
         return map;
 	}
 	
@@ -106,7 +108,7 @@ public class PostServiceImpl implements PostService{
 		Page<Post> page = postRepository.findByTitleContaining(keyword, pageable);
 		
 		log.info("totalElements:"+page.getTotalElements());
-        Page<PostDto.ResponseDto> map = page.map(post -> new PostDto.ResponseDto(post.getId(), post.getTitle(), null, post.getWriter(), post.getView(), post.getCreatedDate(), post.getModifiedDate(), null, null));
+        Page<PostDto.ResponseDto> map = page.map(post -> new PostDto.ResponseDto(post.getId(), post.getTitle(), null, post.getUser().getNickname(), post.getView(), post.getCreatedDate(), post.getModifiedDate(), null, null));
 
 		return map;
 	}
@@ -130,6 +132,4 @@ public class PostServiceImpl implements PostService{
 		
 		return new PageVo(totalPage, startNumber, endNumber, hasPrev, hasNext, prevIndex, nextIndex);
 	}
-
-	
 }
